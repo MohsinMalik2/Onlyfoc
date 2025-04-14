@@ -1,12 +1,19 @@
-import React, { useEffect } from 'react';
-import { Sun, Moon, Info } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useTimer } from './hooks/useTimer';
 import { TimerDisplay } from './components/TimerDisplay';
 import { Controls } from './components/Controls';
 import { ModeSelector } from './components/ModeSelector';
 import About from './components/About';
+import Footer from './components/Footer';
+import AdComponent from './components/AdComponent';
+import Header from './components/Header';
+import HeroSection from './components/HeroSection';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
+import ContactUs from './pages/ContactUs';
+import TechniqueDetails from './pages/TechniqueDetails';
 
 function App() {
   const { state, toggleTimer, resetTimer, changeMode, updateSettings } = useTimer();
@@ -14,6 +21,15 @@ function App() {
     const darkMode = localStorage.getItem('darkMode');
     return darkMode ? JSON.parse(darkMode) : window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
+
+  // Flag to control whether ads are displayed
+  const [showAds, setShowAds] = useState(false);
+
+  useEffect(() => {
+    // Simulate a check for ads (e.g., check if ads are loaded or approved)
+    const adsAvailable = false; // Change this to `true` when ads are ready
+    setShowAds(adsAvailable);
+  }, []);
 
   // Request notification permissions when the app loads
   useEffect(() => {
@@ -24,11 +40,13 @@ function App() {
           toast.success('Notifications enabled!', {
             icon: '🔔',
             duration: 3000,
+            position: 'top-right', // Top-right corner
           });
         } else if (permission === 'denied') {
           toast.error('Please enable notifications for the best experience', {
             icon: '🔕',
             duration: 5000,
+            position: 'top-right', // Top-right corner
           });
         }
       }
@@ -39,6 +57,19 @@ function App() {
     if (!hasAskedPermission) {
       requestNotificationPermission();
       localStorage.setItem('hasAskedNotificationPermission', 'true');
+    }
+  }, []);
+
+  // Show bookmark notification on first visit
+  useEffect(() => {
+    const hasShownBookmarkNotification = sessionStorage.getItem('hasShownBookmarkNotification');
+    if (!hasShownBookmarkNotification) {
+      toast('Bookmark this website to stay on track for free!', {
+        icon: '⭐',
+        duration: 5000,
+        position: 'top-right', // Top-right corner
+      });
+      sessionStorage.setItem('hasShownBookmarkNotification', 'true');
     }
   }, []);
 
@@ -66,64 +97,51 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+      <div className="min-h-100 bg-base-50 dark:bg-base-900 text-base-900 dark:text-base-100 transition-colors duration-300">
         <div className="container mx-auto px-4 py-8">
-          <div className="flex justify-between items-center mb-8">
-            <div className="flex items-center gap-4">
-              <Link to="/" className="text-3xl font-bold hover:text-blue-500 transition-colors">
-                OnlyFoc
-              </Link>
-              <Link
-                to="/about"
-                className="flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors"
-              >
-                <Info size={20} />
-                <span>About</span>
-              </Link>
-            </div>
-            <button
-              onClick={() => setIsDark(!isDark)}
-              className="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300"
-              aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-            >
-              {isDark ? <Sun size={24} className="text-yellow-500" /> : <Moon size={24} className="text-gray-700" />}
-            </button>
-          </div>
+          <Header isDark={isDark} toggleTheme={() => setIsDark(!isDark)} />
 
           <Routes>
             <Route
               path="/"
               element={
-                <div className="max-w-2xl mx-auto">
+                <div className="dark:bg-base-800 from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 py-16 px-6 bg-white rounded-lg ">
+                  
+                  <HeroSection />
+                  <div className="max-w-2xl mx-auto">
                   <ModeSelector 
                     currentMode={state.mode} 
                     onModeChange={changeMode}
                     onUpdateSettings={updateSettings}
                   />
-                  
-                  <div className="flex flex-col items-center">
-                    <TimerDisplay state={state} />
-                    <Controls
-                      state={state}
-                      onToggle={toggleTimer}
-                      onReset={resetTimer}
-                    />
-                  </div>
-
-                  {/* AdSense placeholder */}
-                  <div className="ad-slot mt-8 h-[250px] bg-gray-200 dark:bg-gray-800 rounded-lg flex items-center justify-center transition-colors duration-300">
-                    <p className="text-gray-500 dark:text-gray-400">Advertisement</p>
+                    
+                    <div className="flex flex-col items-center">
+                      <TimerDisplay state={state} />
+                      <Controls
+                        state={state}
+                        onToggle={toggleTimer}
+                        onReset={resetTimer}
+                      />
+                    </div>
                   </div>
                 </div>
               }
             />
             <Route path="/about" element={<About />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
+            <Route path="/contact-us" element={<ContactUs />} />
+            <Route path="/techniques/:id" element={<TechniqueDetails />} />
           </Routes>
+          {/* Conditionally render AdComponent */}
+          {showAds && <AdComponent />}
+          <Footer />
         </div>
+        
         <Toaster 
           position="bottom-right"
           toastOptions={{
-            className: 'dark:bg-gray-800 dark:text-white',
+            className: 'dark:bg-base-800 dark:text-white',
             style: {
               background: isDark ? '#1f2937' : '#ffffff',
               color: isDark ? '#ffffff' : '#000000',

@@ -11,31 +11,31 @@ export default defineConfig({
         name: 'OnlyFoc',
         short_name: 'OnlyFoc',
         description: 'Productivity Timer App',
-        theme_color: '#ffffff',
+        theme_color: '#18cb96', // Updated to match the primary color
         icons: [
           {
-            src: '/icon-192x192.png',
+            src: '/images/brand/192x192 - onlyfoc.png', // Relative path for 192x192 icon
             sizes: '192x192',
-            type: 'image/png'
+            type: 'image/png',
           },
           {
-            src: '/icon-512x512.png',
+            src: '/images/brand/512x512 - onlyfoc.png', // Relative path for 512x512 icon
             sizes: '512x512',
-            type: 'image/png'
-          }
-        ]
+            type: 'image/png',
+          },
+        ],
       },
       workbox: {
         navigateFallback: null,
         cleanupOutdatedCaches: true,
-        sourcemap: false
+        sourcemap: false,
       },
       devOptions: {
         enabled: true,
         type: 'module',
-        navigateFallback: 'index.html'
-      }
-    })
+        navigateFallback: 'index.html',
+      },
+    }),
   ],
   optimizeDeps: {
     exclude: ['lucide-react'],
@@ -44,8 +44,8 @@ export default defineConfig({
     sourcemap: false,
     rollupOptions: {
       output: {
-        manualChunks: undefined
-      }
-    }
-  }
+        manualChunks: undefined,
+      },
+    },
+  },
 });

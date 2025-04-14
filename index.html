@@ -1,18 +1,59 @@
 <!doctype html>
 <html lang="en" class="light">
   <head>
+    <!-- Character Encoding -->
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+
+    <!-- Viewport for Responsive Design -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#ffffff" />
-    <meta name="description" content="OnlyFoc - Productivity Timer App" />
-    <title>OnlyFoc</title>
+
+    <!-- Page Title -->
+    <title>OnlyFoc - Distract ends Today</title>
+
+    <!-- Meta Description -->
+    <meta name="description" content="OnlyFoc helps you boost your productivity with scientifically proven focus techniques like Pomodoro, 52/17 Rule, DeskTime Method, and Ultradian Rhythm." />
+
+    <!-- Meta Keywords -->
+    <meta name="keywords" content="productivity, focus, pomodoro, time management, 52/17 rule, desktime method, ultradian rhythm, productivity techniques" />
+
+    <!-- Author -->
+    <meta name="author" content="Mohsin Nawaz" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/images/brand/icon.png" />
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#18cb96" />
+
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="OnlyFoc - Boost Your Productivity" />
+    <meta property="og:description" content="Discover scientifically proven focus techniques to maximize your productivity and achieve your goals with OnlyFoc." />
+    <meta property="og:image" content="/images/brand/og-image.png" />
+    <meta property="og:url" content="https://www.onlyfoc.com" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="OnlyFoc - Boost Your Productivity" />
+    <meta name="twitter:description" content="Discover scientifically proven focus techniques to maximize your productivity and achieve your goals with OnlyFoc." />
+    <meta name="twitter:image" content="/images/brand/og-image.png" />
+
+    <!-- Robots Meta Tag -->
+    <meta name="robots" content="index, follow" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.onlyfoc.com" />
+
+    <!-- Preload Fonts (Optional for Performance) -->
+    <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+
+    <!-- JavaScript for Theme Preference -->
     <script>
       // Check for saved theme preference or use system preference
       const savedTheme = localStorage.getItem('darkMode');
       const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       const theme = savedTheme ? JSON.parse(savedTheme) : systemPrefersDark;
-      
+
       // Apply theme
       if (theme) {
         document.documentElement.classList.add('dark');
@@ -21,7 +62,7 @@
       }
     </script>
   </head>
-  <body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors">
+  <body class="bg-base-50 dark:bg-base-900 text-base-900 dark:text-base-100 transition-colors">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

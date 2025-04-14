@@ -97,13 +97,13 @@ export const ModeSelector: React.FC<ModeSelectorProps> = ({ currentMode, onModeC
             onClick={() => onModeChange(mode)}
             className={`flex flex-col items-center p-4 rounded-lg transition-all transform hover:scale-105 border ${
               currentMode === mode
-                ? 'bg-blue-500 text-white shadow-lg border-blue-600'
-                : 'bg-white hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 border-gray-200 dark:border-gray-600 shadow-sm hover:shadow-md'
+                ? 'bg-primary-500 text-white shadow-lg border-primary-600'
+                : 'bg-white hover:bg-base-50 dark:bg-base-700 dark:hover:bg-base-600 text-base-800 dark:text-base-200 border-gray-200 dark:border-gray-600 shadow-sm hover:shadow-md'
             }`}
           >
             <div className="flex items-center gap-2 mb-1">
               {React.cloneElement(modeInfo[mode].icon as React.ReactElement, {
-                className: currentMode === mode ? 'text-white' : 'text-gray-600 dark:text-gray-300'
+                className: currentMode === mode ? 'text-white' : 'text-base-600 dark:text-base-300'
               })}
               <span className="font-medium">{modeInfo[mode].label}</span>
             </div>
@@ -113,16 +113,16 @@ export const ModeSelector: React.FC<ModeSelectorProps> = ({ currentMode, onModeC
       </div>
 
       {/* Mode description */}
-      <div className="text-sm text-gray-700 dark:text-gray-300 mb-4 p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
+      <div className="text-sm text-base-700 dark:text-base-300 mb-4 p-4 bg-white dark:bg-base-700 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
         {modeInfo[currentMode].longDescription}
       </div>
 
       {/* Custom timer form */}
       {currentMode === 'custom' && (
-        <form onSubmit={handleCustomSubmit} className="mt-4 p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
+        <form onSubmit={handleCustomSubmit} className="mt-4 p-4 bg-white dark:bg-base-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label htmlFor="workDuration" className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
+              <label htmlFor="workDuration" className="block text-sm font-medium mb-1 text-base-700 dark:text-base-300">
                 Work Duration (minutes)
               </label>
               <input
@@ -130,13 +130,13 @@ export const ModeSelector: React.FC<ModeSelectorProps> = ({ currentMode, onModeC
                 id="workDuration"
                 value={customWork}
                 onChange={handleWorkChange}
-                className="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-base-700 text-base-900 dark:text-base-100 shadow-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                 min="1"
                 required
               />
             </div>
             <div>
-              <label htmlFor="breakDuration" className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
+              <label htmlFor="breakDuration" className="block text-sm font-medium mb-1 text-base-700 dark:text-base-300">
                 Break Duration (minutes)
               </label>
               <input
@@ -144,7 +144,7 @@ export const ModeSelector: React.FC<ModeSelectorProps> = ({ currentMode, onModeC
                 id="breakDuration"
                 value={customBreak}
                 onChange={handleBreakChange}
-                className="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-base-700 text-base-900 dark:text-base-100 shadow-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                 min="1"
                 required
               />
@@ -152,7 +152,7 @@ export const ModeSelector: React.FC<ModeSelectorProps> = ({ currentMode, onModeC
           </div>
           <button
             type="submit"
-            className="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-colors shadow-sm hover:shadow-md"
+            className="mt-4 w-full bg-primary-500 text-white py-2 rounded-lg hover:bg-primary-600 transition-colors shadow-sm hover:shadow-md"
           >
             Apply Custom Timer
           </button>

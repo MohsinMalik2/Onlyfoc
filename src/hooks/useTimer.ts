@@ -97,14 +97,14 @@ export const useTimer = () => {
       if ('Notification' in window) {
         if (Notification.permission === 'granted') {
           new Notification(state.isBreak ? 'Break Time!' : 'Time to Focus!', {
-            body: state.isBreak ? 'Take a well-deserved break!' : 'Time to get back to work!',
+            body: state.isBreak ? 'Time to get back to work!' : 'Take a well-deserved break!' ,
             icon: '/icon-192x192.png'
           });
         } else if (Notification.permission !== 'denied') {
           Notification.requestPermission().then(permission => {
             if (permission === 'granted') {
               new Notification(state.isBreak ? 'Break Time!' : 'Time to Focus!', {
-                body: state.isBreak ? 'Take a well-deserved break!' : 'Time to get back to work!',
+                body: state.isBreak ? 'Time to get back to work!' : 'Take a well-deserved break!' ,
                 icon: '/icon-192x192.png'
               });
             }

@@ -29,7 +29,7 @@ export const TimerDisplay: React.FC<TimerDisplayProps> = ({ state }) => {
   const progress = (state.timeLeft / getMaxTime()) * 100;
 
   return (
-    <div className="relative w-64 h-64 bg-white dark:bg-gray-800 rounded-full border border-gray-200 dark:border-gray-700 shadow-lg p-4">
+    <div className="relative w-64 h-64 bg-white dark:bg-base-800 rounded-full border border-gray-200 dark:border-gray-700 shadow-lg p-4">
       <svg className="w-full h-full transform -rotate-90">
         <circle
           cx="50%"
@@ -43,7 +43,7 @@ export const TimerDisplay: React.FC<TimerDisplayProps> = ({ state }) => {
           cx="50%"
           cy="50%"
           r="45%"
-          className={`${state.isBreak ? 'stroke-green-500' : 'stroke-blue-500'} transition-all`}
+          className={`${state.isBreak ? 'stroke-green-500' : 'stroke-primary-500'} transition-all`}
           fill="none"
           strokeWidth="8"
           strokeDasharray={`${progress} 100`}
@@ -51,13 +51,13 @@ export const TimerDisplay: React.FC<TimerDisplayProps> = ({ state }) => {
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <div className="text-5xl font-bold mb-2 text-gray-800 dark:text-gray-100">
+        <div className="text-5xl font-bold mb-2 text-base-800 dark:text-base-100">
           {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
         </div>
-        <div className="text-sm text-gray-700 dark:text-gray-300">
+        <div className="text-sm text-base-700 dark:text-base-300">
           {state.isBreak ? (state.isLongBreak ? 'Long Break' : 'Short Break') : 'Focus Time'}
         </div>
-        <div className="text-xs mt-1 text-gray-600 dark:text-gray-400">
+        <div className="text-xs mt-1 text-base-600 dark:text-base-400">
           Session {state.completedSessions + 1}
         </div>
       </div>
